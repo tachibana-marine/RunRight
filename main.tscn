@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://pst27rhfnw4m"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_7wopl"]
+[ext_resource type="PackedScene" uid="uid://ba7q0pqsfgtjf" path="res://box.tscn" id="1_jto2i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s41oi"]
+size = Vector2(1533, 68)
+
+[node name="Node2D" type="Node2D"]
+position = Vector2(3, 0)
+script = ExtResource("1_7wopl")
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_jto2i")]
+position = Vector2(74, 187)
+
+[node name="FloorStaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(-30, 580)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FloorStaticBody2D"]
+position = Vector2(375.5, 28)
+shape = SubResource("RectangleShape2D_s41oi")
+
+[node name="ColorRect" type="ColorRect" parent="FloorStaticBody2D"]
+offset_left = -412.0
+offset_top = -7.0
+offset_right = 1144.0
+offset_bottom = 63.0
+
+[node name="ObstacleMarker" type="Marker2D" parent="."]
+position = Vector2(1018, 576)

@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://ba7q0pqsfgtjf"]
+
+[ext_resource type="Script" path="res://box.gd" id="1_p0wvk"]
+[ext_resource type="Texture2D" uid="uid://bceijhbluhpib" path="res://asset/1px.png" id="2_4jxmd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3y5t6"]
+size = Vector2(38, 37)
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_p0wvk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.0352941, 1, 1, 1)
+scale = Vector2(40, 40)
+texture = ExtResource("2_4jxmd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_3y5t6")
