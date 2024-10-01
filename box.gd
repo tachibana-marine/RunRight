@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @export var walking_speed: float = 400.0
 @export var dash_speed: float = 800.0
-@export var jump_height: float = 200.0
+@export var jump_height: float = 450.0
 @export var acceleration = 0.15
 @export var fliction = 0.8
 @export var gravity: float = 4000.0

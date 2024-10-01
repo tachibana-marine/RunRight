@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4ookdrskuklg"]
+
+[ext_resource type="Script" path="res://background_bubble.gd" id="2_wcn48"]
+
+[node name="Node2D" type="Node2D"]
+modulate = Color(0.800666, 0.832092, 0.893843, 1)
+script = ExtResource("2_wcn48")
+
+[node name="SpriteNode" type="Node2D" parent="."]

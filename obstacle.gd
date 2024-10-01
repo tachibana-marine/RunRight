@@ -1,3 +1,4 @@
+class_name Obstacle
 extends AnimatableBody2D
 
 @export var height = 100
