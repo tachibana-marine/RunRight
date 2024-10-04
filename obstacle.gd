@@ -8,8 +8,8 @@ extends AnimatableBody2D
 var collision_shape = RectangleShape2D.new()
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	adjust_height()
-	adjust_width()
+	set_height(randi() % 400)
+	set_width(randi_range(30, 60))
 	$CollisionShape2D.shape = collision_shape
 	var tween = create_tween().set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 	tween.set_loops().set_parallel(false)

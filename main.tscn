@@ -1,11 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://pst27rhfnw4m"]
+[gd_scene load_steps=6 format=3 uid="uid://pst27rhfnw4m"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_7wopl"]
 [ext_resource type="PackedScene" uid="uid://ba7q0pqsfgtjf" path="res://box.tscn" id="1_jto2i"]
 [ext_resource type="Texture2D" uid="uid://bceijhbluhpib" path="res://asset/1px.png" id="2_u4a6w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s41oi"]
-size = Vector2(1533, 68)
+size = Vector2(1679, 68)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_112ni"]
+size = Vector2(76, 608)
 
 [node name="Node2D" type="Node2D"]
 position = Vector2(3, 0)
@@ -25,7 +28,7 @@ position = Vector2(-30, 580)
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FloorStaticBody2D"]
-position = Vector2(375.5, 28)
+position = Vector2(448.5, 28)
 shape = SubResource("RectangleShape2D_s41oi")
 
 [node name="ColorRect" type="ColorRect" parent="FloorStaticBody2D"]
@@ -36,3 +39,37 @@ offset_bottom = 63.0
 
 [node name="ObstacleMarker" type="Marker2D" parent="."]
 position = Vector2(1018, 576)
+
+[node name="GuardStaticBody2" type="StaticBody2D" parent="."]
+position = Vector2(-668, 12)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GuardStaticBody2"]
+position = Vector2(1822, 310)
+shape = SubResource("RectangleShape2D_112ni")
+
+[node name="GuardStaticBody" type="StaticBody2D" parent="."]
+position = Vector2(-334, 6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GuardStaticBody"]
+position = Vector2(28, 294)
+shape = SubResource("RectangleShape2D_112ni")
+
+[node name="HealthLabel" type="Label" parent="."]
+offset_left = 40.0
+offset_top = 56.0
+offset_right = 235.0
+offset_bottom = 106.0
+text = "Score:"
+
+[node name="ScoreLabel" type="Label" parent="."]
+offset_left = 20.0
+offset_top = 28.0
+offset_right = 215.0
+offset_bottom = 78.0
+text = "Score:"
+
+[node name="ScoreTimer" type="Timer" parent="."]
+wait_time = 0.1
+
+[connection signal="damage" from="CharacterBody2D" to="." method="_on_character_body_2d_damage"]
+[connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]

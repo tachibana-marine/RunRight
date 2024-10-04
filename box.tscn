@@ -1,13 +1,43 @@
-[gd_scene load_steps=4 format=3 uid="uid://ba7q0pqsfgtjf"]
+[gd_scene load_steps=9 format=3 uid="uid://ba7q0pqsfgtjf"]
 
 [ext_resource type="Script" path="res://box.gd" id="1_p0wvk"]
 [ext_resource type="Texture2D" uid="uid://bceijhbluhpib" path="res://asset/1px.png" id="2_4jxmd"]
+[ext_resource type="Texture2D" uid="uid://orcqnaxjvpf0" path="res://asset/Okame2.png" id="2_r8pny"]
+[ext_resource type="Texture2D" uid="uid://cp8exeaddxq2l" path="res://asset/8px.png" id="3_cuj6p"]
+[ext_resource type="Texture2D" uid="uid://1yg4qi1ehfcf" path="res://asset/Okame3.png" id="3_l08bo"]
+[ext_resource type="Texture2D" uid="uid://b6pnwuavw228u" path="res://asset/Okame.png" id="4_7vejy"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_svmio"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_r8pny")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_l08bo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_7vejy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_l08bo")
+}],
+"loop": true,
+"name": &"default",
+"speed": 11.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3y5t6"]
 size = Vector2(38, 37)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 script = ExtResource("1_p0wvk")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_svmio")
+frame_progress = 0.391302
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.0352941, 1, 1, 1)
@@ -16,3 +46,20 @@ texture = ExtResource("2_4jxmd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_3y5t6")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(-19, 18)
+amount = 4
+lifetime = 0.05
+texture = ExtResource("3_cuj6p")
+emission_shape = 3
+emission_rect_extents = Vector2(0, 4)
+direction = Vector2(-1, -0.5)
+spread = 0.0
+initial_velocity_max = 1000.0
+color = Color(0.721569, 1, 1, 1)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
