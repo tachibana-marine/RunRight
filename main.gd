@@ -3,7 +3,7 @@ extends Node2D
 
 signal player_died
 
-const MAX_HEALTH = 10
+const MAX_HEALTH = 100
 
 var obstacle_scene = preload("res://obstacle.tscn")
 var background_bubble = preload("res://background_bubble.tscn")
