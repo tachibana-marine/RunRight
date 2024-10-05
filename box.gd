@@ -1,4 +1,7 @@
+class_name Box
 extends CharacterBody2D
+
+const DAMAGE_COOL_DOWN = 0.1
 
 @export var walking_speed: float = 800.0
 @export var dash_speed: float = 1600.0
@@ -9,6 +12,10 @@ extends CharacterBody2D
 @export var wind_acceleration: float = 2000.0
 
 signal damage
+var is_dead: bool = false:
+	set(value):
+		is_dead = value
+
 var is_outside_camera: bool = false
 var is_invincible: bool = false
 var screen_size
@@ -21,10 +28,13 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if (is_outside_camera and not is_invincible):
+	if (is_dead):
+		return
+
+	if (is_outside_camera and not is_invincible and not is_dead):
 		damage.emit()
 		is_invincible = true
-		get_tree().create_timer(0.2).connect("timeout", func(): is_invincible = false)
+		get_tree().create_timer(DAMAGE_COOL_DOWN).connect("timeout", func(): is_invincible = false)
 	if (is_on_floor()):
 		velocity.x -= delta * wind_acceleration
 		$CPUParticles2D.emitting = true

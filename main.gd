@@ -3,6 +3,8 @@ extends Node2D
 
 signal player_died
 
+const MAX_HEALTH = 10
+
 var obstacle_scene = preload("res://obstacle.tscn")
 var background_bubble = preload("res://background_bubble.tscn")
 
@@ -10,7 +12,8 @@ var screen_size: Vector2
 var is_bubble_spawnable: bool = true
 var is_game_over: bool = false
 var score: int = 0;
-var health: int = 100;
+var health: int = MAX_HEALTH;
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -19,7 +22,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if (is_game_over):
 		return
 	if (randi() % 100 == 0):
@@ -36,7 +39,7 @@ func _process(delta: float) -> void:
 
 func _start_game():
 	score = 0
-	health = 100
+	health = MAX_HEALTH
 	_set_score_label()
 	_set_health_label()
 	$ScoreTimer.start()
@@ -44,7 +47,8 @@ func _start_game():
 func _game_over():
 	is_game_over = true
 	$ScoreTimer.stop()
-	player_died.emit()
+	player_died.emit(score)
+	$Box.is_dead = true
 
 func _set_score_label():
 	$StatusCanvas/ScoreLabel.text = "Score: " + str(score)

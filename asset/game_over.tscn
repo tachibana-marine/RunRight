@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://68cybaobfbj7"]
+
+[ext_resource type="Script" path="res://asset/game_over.gd" id="1_ucjy5"]
+[ext_resource type="Theme" uid="uid://yfnvvxrk7wj4" path="res://asset/button_theme.tres" id="2_ywtoq"]
+
+[node name="GameOver" type="CanvasLayer"]
+script = ExtResource("1_ucjy5")
+
+[node name="GameOverLabel" type="Label" parent="."]
+offset_left = 314.0
+offset_top = 211.0
+offset_right = 661.0
+offset_bottom = 299.0
+theme_override_font_sizes/font_size = 64
+text = "Game Over"
+
+[node name="ScoreLabel" type="Label" parent="."]
+offset_left = 416.0
+offset_top = 329.0
+offset_right = 518.0
+offset_bottom = 374.0
+theme_override_font_sizes/font_size = 32
+text = "Score: "
+
+[node name="TryAgainButton" type="Button" parent="."]
+offset_left = 466.0
+offset_top = 401.0
+offset_right = 547.0
+offset_bottom = 432.0
+theme = ExtResource("2_ywtoq")
+text = "Try Again"
+
+[connection signal="pressed" from="TryAgainButton" to="." method="_on_try_again_button_pressed"]
