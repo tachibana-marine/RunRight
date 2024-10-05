@@ -19,6 +19,14 @@ offset_left = 831.0
 offset_top = 600.0
 offset_right = 902.0
 offset_bottom = 623.0
-text = "Ver. 0.0.1"
+text = "Ver. 0.0.2"
+
+[node name="Label" type="Label" parent="."]
+offset_left = 101.0
+offset_top = 593.0
+offset_right = 280.0
+offset_bottom = 668.0
+text = "Left/Right Arrow: Move
+Space: Jump"
 
 [connection signal="pressed" from="StartGameButton" to="." method="_on_start_game_button_pressed"]
