@@ -1,21 +1,27 @@
+class_name Main
 extends Node2D
+
+signal player_died
 
 var obstacle_scene = preload("res://obstacle.tscn")
 var background_bubble = preload("res://background_bubble.tscn")
 
 var screen_size: Vector2
 var is_bubble_spawnable: bool = true
+var is_game_over: bool = false
 var score: int = 0;
 var health: int = 100;
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	screen_size = get_viewport().size
-	$ScoreTimer.start()
+	_start_game()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if (is_game_over):
+		return
 	if (randi() % 100 == 0):
 		var obstacle: Obstacle = obstacle_scene.instantiate()
 		obstacle.position = $ObstacleMarker.position
@@ -28,12 +34,33 @@ func _process(delta: float) -> void:
 		is_bubble_spawnable = false
 		get_tree().create_timer(1).connect("timeout", func(): is_bubble_spawnable = true)
 
+func _start_game():
+	score = 0
+	health = 100
+	_set_score_label()
+	_set_health_label()
+	$ScoreTimer.start()
+
+func _game_over():
+	is_game_over = true
+	$ScoreTimer.stop()
+	player_died.emit()
+
+func _set_score_label():
+	$StatusCanvas/ScoreLabel.text = "Score: " + str(score)
+
+func _set_health_label():
+	$StatusCanvas/HealthLabel.text = "Health: " + str(health)
 
 func _on_score_timer_timeout() -> void:
 	score += 1
-	$ScoreLabel.text = "Score: " + str(score)
+	_set_score_label()
 
 
 func _on_character_body_2d_damage() -> void:
+	if (is_game_over):
+		return
 	health -= 1
-	$HealthLabel.text = "Health: " + str(health)
+	_set_health_label()
+	if (health <= 0):
+		_game_over()

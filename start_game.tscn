@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://huxconqxryu2"]
+
+[ext_resource type="Theme" uid="uid://yfnvvxrk7wj4" path="res://asset/button_theme.tres" id="1_dmm37"]
+[ext_resource type="Script" path="res://start_game.gd" id="1_gyshm"]
+
+[node name="StartGame" type="CanvasLayer"]
+script = ExtResource("1_gyshm")
+
+[node name="StartGameButton" type="Button" parent="."]
+offset_left = 472.0
+offset_top = 345.0
+offset_right = 568.0
+offset_bottom = 376.0
+theme = ExtResource("1_dmm37")
+text = "Start Game"
+
+[node name="VersionLabel" type="Label" parent="."]
+offset_left = 831.0
+offset_top = 600.0
+offset_right = 902.0
+offset_bottom = 623.0
+text = "Ver. 0.0.1"
+
+[connection signal="pressed" from="StartGameButton" to="." method="_on_start_game_button_pressed"]

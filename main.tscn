@@ -11,14 +11,16 @@ size = Vector2(1679, 68)
 size = Vector2(76, 608)
 
 [node name="Node2D" type="Node2D"]
-position = Vector2(3, 0)
+position = Vector2(4, 1)
 script = ExtResource("1_7wopl")
 
 [node name="Background" type="Sprite2D" parent="."]
 modulate = Color(0.452921, 0.469463, 0.617279, 1)
-position = Vector2(557.75, 326.75)
-scale = Vector2(1116.5, 654.5)
+position = Vector2(497.25, 326.75)
+scale = Vector2(995.5, 654.5)
 texture = ExtResource("2_u4a6w")
+
+[node name="Camera2D" type="Camera2D" parent="Background"]
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_jto2i")]
 position = Vector2(74, 187)
@@ -44,7 +46,7 @@ position = Vector2(1018, 576)
 position = Vector2(-668, 12)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GuardStaticBody2"]
-position = Vector2(1822, 310)
+position = Vector2(1751, 278)
 shape = SubResource("RectangleShape2D_112ni")
 
 [node name="GuardStaticBody" type="StaticBody2D" parent="."]
@@ -54,22 +56,28 @@ position = Vector2(-334, 6)
 position = Vector2(28, 294)
 shape = SubResource("RectangleShape2D_112ni")
 
-[node name="HealthLabel" type="Label" parent="."]
-offset_left = 40.0
-offset_top = 56.0
-offset_right = 235.0
-offset_bottom = 106.0
-text = "Score:"
-
-[node name="ScoreLabel" type="Label" parent="."]
-offset_left = 20.0
-offset_top = 28.0
-offset_right = 215.0
-offset_bottom = 78.0
-text = "Score:"
-
 [node name="ScoreTimer" type="Timer" parent="."]
 wait_time = 0.1
+
+[node name="StartCanvas" type="CanvasLayer" parent="."]
+
+[node name="GameOverCanvas" type="CanvasLayer" parent="."]
+
+[node name="StatusCanvas" type="CanvasLayer" parent="."]
+
+[node name="HealthLabel" type="Label" parent="StatusCanvas"]
+offset_left = 29.0
+offset_top = 59.0
+offset_right = 224.0
+offset_bottom = 109.0
+text = "Health:"
+
+[node name="ScoreLabel" type="Label" parent="StatusCanvas"]
+offset_left = 29.0
+offset_top = 29.0
+offset_right = 224.0
+offset_bottom = 57.0
+text = "Score:"
 
 [connection signal="damage" from="CharacterBody2D" to="." method="_on_character_body_2d_damage"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
